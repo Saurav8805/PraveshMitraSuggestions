@@ -6,6 +6,7 @@ const path = require('path');
 require('dotenv').config();
 const { sendThankYouEmail } = require('./emailService');
 const { getDocumentLink } = require('./driveConfig');
+const { sendEmailOTP, sendSMSOTP, verifyOTP, resendOTP } = require('./otpService');
 
 const app = express();
 
@@ -101,6 +102,98 @@ const Response = mongoose.model('Response', responseSchema);
 // Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Send Email OTP
+app.post('/api/send-email-otp', async (req, res) => {
+  try {
+    const { email, name } = req.body;
+
+    if (!email || !name) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and name are required'
+      });
+    }
+
+    const result = await sendEmailOTP(email, name);
+    res.json(result);
+  } catch (error) {
+    console.error('Send email OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send OTP'
+    });
+  }
+});
+
+// Send SMS OTP
+app.post('/api/send-sms-otp', async (req, res) => {
+  try {
+    const { mobile, name } = req.body;
+
+    if (!mobile || !name) {
+      return res.status(400).json({
+        success: false,
+        message: 'Mobile number and name are required'
+      });
+    }
+
+    const result = await sendSMSOTP(mobile, name);
+    res.json(result);
+  } catch (error) {
+    console.error('Send SMS OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send OTP'
+    });
+  }
+});
+
+// Verify OTP
+app.post('/api/verify-otp', async (req, res) => {
+  try {
+    const { identifier, otp, type } = req.body;
+
+    if (!identifier || !otp || !type) {
+      return res.status(400).json({
+        success: false,
+        message: 'Identifier, OTP, and type are required'
+      });
+    }
+
+    const result = verifyOTP(identifier, otp, type);
+    res.json(result);
+  } catch (error) {
+    console.error('Verify OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to verify OTP'
+    });
+  }
+});
+
+// Resend OTP
+app.post('/api/resend-otp', async (req, res) => {
+  try {
+    const { identifier, type } = req.body;
+
+    if (!identifier || !type) {
+      return res.status(400).json({
+        success: false,
+        message: 'Identifier and type are required'
+      });
+    }
+
+    const result = await resendOTP(identifier, type);
+    res.json(result);
+  } catch (error) {
+    console.error('Resend OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to resend OTP'
+    });
+  }
 });
 
 // Submit Form API
