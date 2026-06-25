@@ -66,67 +66,27 @@
                 <!-- Mobile and Email Row -->
                 <div class="form-row">
                     <div class="form-group">
-                        <div style="position: relative;">
-                            <input 
-                                type="tel" 
-                                id="mobileNo" 
-                                name="mobileNo" 
-                                class="form-input" 
-                                placeholder="Mobile No." 
-                                pattern="[0-9]{10}"
-                                autocomplete="tel"
-                                required
-                            >
-                            <button type="button" id="sendMobileOtp" class="otp-btn" style="display: none;">
-                                Send OTP
-                            </button>
-                        </div>
-                        <div id="mobileOtpSection" class="otp-section" style="display: none;">
-                            <input 
-                                type="text" 
-                                id="mobileOtp" 
-                                class="form-input" 
-                                placeholder="Enter 6-digit OTP" 
-                                maxlength="6"
-                                pattern="[0-9]{6}"
-                            >
-                            <div class="otp-actions">
-                                <button type="button" id="verifyMobileOtp" class="verify-btn">Verify</button>
-                                <button type="button" id="resendMobileOtp" class="resend-btn">Resend OTP</button>
-                            </div>
-                            <div id="mobileOtpStatus" class="otp-status"></div>
-                        </div>
+                        <input 
+                            type="tel" 
+                            id="mobileNo" 
+                            name="mobileNo" 
+                            class="form-input" 
+                            placeholder="Mobile No." 
+                            pattern="[0-9]{10}"
+                            autocomplete="tel"
+                            required
+                        >
                     </div>
                     <div class="form-group">
-                        <div style="position: relative;">
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                class="form-input" 
-                                placeholder="Email"
-                                autocomplete="email"
-                                required
-                            >
-                            <button type="button" id="sendEmailOtp" class="otp-btn" style="display: none;">
-                                Send OTP
-                            </button>
-                        </div>
-                        <div id="emailOtpSection" class="otp-section" style="display: none;">
-                            <input 
-                                type="text" 
-                                id="emailOtp" 
-                                class="form-input" 
-                                placeholder="Enter 6-digit OTP" 
-                                maxlength="6"
-                                pattern="[0-9]{6}"
-                            >
-                            <div class="otp-actions">
-                                <button type="button" id="verifyEmailOtp" class="verify-btn">Verify</button>
-                                <button type="button" id="resendEmailOtp" class="resend-btn">Resend OTP</button>
-                            </div>
-                            <div id="emailOtpStatus" class="otp-status"></div>
-                        </div>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="Email"
+                            autocomplete="email"
+                            required
+                        >
                     </div>
                 </div>
 
@@ -526,7 +486,6 @@
         </div>
     </footer>
 
-    <script src="/otpVerification.js"></script>
     <script src="/script.js"></script>
 </body>
 </html>

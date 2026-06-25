@@ -109,12 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Check OTP verification
-        if (!window.isOTPVerified || !window.isOTPVerified()) {
-            showError('Please verify your email and mobile number first');
-            return;
-        }
-
         // Hide previous messages
         successMessage.classList.add('hidden');
         errorMessage.classList.add('hidden');
