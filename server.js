@@ -179,10 +179,11 @@ app.post('/api/submit', async (req, res) => {
 
     res.status(201).json({ 
       success: true, 
-      message: 'Response submitted successfully! Check your email for college list.',
+      message: 'Response submitted successfully! Check your email for details.',
       data: newResponse,
       documentLink: documentInfo ? documentInfo.link : null,
       documentName: documentInfo ? documentInfo.name : null,
+      percentileRange: percentileRange,
       emailSent: true
     });
   } catch (error) {

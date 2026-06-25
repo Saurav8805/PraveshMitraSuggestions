@@ -6,6 +6,14 @@ function scrollToForm() {
     });
 }
 
+// Reset form and clear success message
+function resetSuccessMessage() {
+    const successMessage = document.getElementById('successMessage');
+    const documentContainer = document.getElementById('documentLinkContainer');
+    successMessage.classList.add('hidden');
+    documentContainer.innerHTML = '';
+}
+
 // Toggle dropdown
 function toggleDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
@@ -164,37 +172,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 successMessage.classList.remove('hidden');
                 form.reset();
                 
-                // If document link is provided, add it to success message
+                // If document link is provided, show it prominently
                 if (result.documentLink) {
-                    const successText = successMessage.querySelector('p');
-                    const documentButton = document.createElement('a');
-                    documentButton.href = result.documentLink;
-                    documentButton.target = '_blank';
-                    documentButton.style.cssText = 'display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px;';
-                    documentButton.textContent = '📄 View Your College List';
-                    
-                    const docInfo = document.createElement('p');
-                    docInfo.style.cssText = 'margin-top: 10px; font-size: 14px; color: #718096;';
-                    docInfo.textContent = result.documentName || 'Access your personalized college list';
-                    
-                    successMessage.appendChild(docInfo);
-                    successMessage.appendChild(documentButton);
+                    const documentContainer = document.getElementById('documentLinkContainer');
+                    documentContainer.innerHTML = `
+                        <div style="margin-top: 25px; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
+                            <h3 style="color: white; margin: 10px 0; font-size: 20px;">${result.documentName || 'Your College List'}</h3>
+                            <p style="color: rgba(255,255,255,0.9); margin: 15px 0; font-size: 14px;">Based on your ${result.percentileRange}% percentile range</p>
+                            <a href="${result.documentLink}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style="display: inline-block; 
+                                      background: white; 
+                                      color: #667eea; 
+                                      padding: 14px 35px; 
+                                      text-decoration: none; 
+                                      border-radius: 25px; 
+                                      font-weight: bold; 
+                                      font-size: 16px; 
+                                      margin-top: 10px;
+                                      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                                      transition: transform 0.2s;">
+                                📄 VIEW YOUR COLLEGE LIST
+                            </a>
+                            <p style="color: rgba(255,255,255,0.8); margin-top: 15px; font-size: 13px;">Click above to access your personalized document</p>
+                        </div>
+                    `;
                 }
                 
                 // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-                // Hide success message after 10 seconds (longer since there's a link)
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                    // Remove added elements
-                    const addedElements = successMessage.querySelectorAll('a, p:last-child');
-                    addedElements.forEach(el => {
-                        if (el.textContent.includes('college list') || el.textContent.includes('College List')) {
-                            el.remove();
-                        }
-                    });
-                }, 10000);
+                // Don't auto-hide if there's a document link (user needs time to click it)
+                if (!result.documentLink) {
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                    }, 5000);
+                }
             } else {
                 showError(result.message || 'Something went wrong. Please try again.');
             }
