@@ -5,7 +5,25 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
 const { sendThankYouEmail } = require('./emailService');
-const { getDocumentLink } = require('./driveConfig');
+
+// Try to load driveConfig, but make it optional for deployment
+let getDocumentLink;
+try {
+  // Try local config first (for development)
+  const driveConfig = require('./driveConfig');
+  getDocumentLink = driveConfig.getDocumentLink;
+  console.log('✅ Using local driveConfig.js');
+} catch (error) {
+  try {
+    // Fall back to production config (uses environment variables)
+    const driveConfigProd = require('./driveConfig.production');
+    getDocumentLink = driveConfigProd.getDocumentLink;
+    console.log('✅ Using driveConfig.production.js with environment variables');
+  } catch (error2) {
+    console.log('⚠️ No drive configuration found - document links will not be available');
+    getDocumentLink = () => null; // Return null if no config exists
+  }
+}
 
 const app = express();
 
