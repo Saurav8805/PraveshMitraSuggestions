@@ -1,38 +1,38 @@
 // Production Drive Configuration
-// This file can be deployed to Vercel
-// It uses environment variables for file IDs instead of hardcoding them
+// This file is deployed to Vercel with actual file IDs
+// Google Drive file IDs are public-safe (they're just document identifiers)
 
 const driveDocuments = {
   '10-30': {
-    fileId: process.env.DRIVE_10_30 || '',
+    fileId: '19Afgf08pqj-H8q1zVs65NeeMKKjBoUkq',
     name: '10-30 Percentile College List'
   },
   '30-40': {
-    fileId: process.env.DRIVE_30_40 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '30-40 Percentile College List'
   },
   '40-50': {
-    fileId: process.env.DRIVE_40_50 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '40-50 Percentile College List'
   },
   '50-60': {
-    fileId: process.env.DRIVE_50_60 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '50-60 Percentile College List'
   },
   '60-70': {
-    fileId: process.env.DRIVE_60_70 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '60-70 Percentile College List'
   },
   '70-80': {
-    fileId: process.env.DRIVE_70_80 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '70-80 Percentile College List'
   },
   '80-90': {
-    fileId: process.env.DRIVE_80_90 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '80-90 Percentile College List'
   },
   '90-100': {
-    fileId: process.env.DRIVE_90_100 || '',
+    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
     name: '90-100 Percentile College List (Top Tier)'
   }
 };
@@ -40,7 +40,7 @@ const driveDocuments = {
 function getDocumentLink(percentileRange) {
   const doc = driveDocuments[percentileRange];
   
-  if (!doc || !doc.fileId || doc.fileId === '') {
+  if (!doc || !doc.fileId) {
     return null;
   }
   
