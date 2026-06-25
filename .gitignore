@@ -26,4 +26,12 @@ Thumbs.db
 
 # Security and sensitive files
 SECURITY_BREACH_RESPONSE.md
+URGENT_ACTION_PLAN.md
+GITHUB_GITGUARDIAN_ALERT_RESPONSE.md
+SECURITY_FIX_SUMMARY.txt
+SIMPLE_FIX.md
+CLEANUP_COMPLETE.md
 *_BACKUP/
+
+# Drive configuration with file IDs
+driveConfig.js

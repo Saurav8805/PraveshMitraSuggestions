@@ -118,10 +118,17 @@ document.addEventListener('DOMContentLoaded', function() {
             mhtCetScore: document.getElementById('mhtCetScore').value,
             jeeScore: document.getElementById('jeeScore').value || null,
             branches: getSelectedCheckboxValues('branches'),
-            cities: getSelectedCheckboxValues('cities')
+            cities: getSelectedCheckboxValues('cities'),
+            percentileRange: document.getElementById('percentileRange').value
         };
 
         // Validation
+        if (!formData.percentileRange) {
+            showError('Please select your percentile range');
+            resetButton();
+            return;
+        }
+
         if (formData.branches.length === 0) {
             showError('Please select at least one branch');
             resetButton();
@@ -157,13 +164,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 successMessage.classList.remove('hidden');
                 form.reset();
                 
+                // If document link is provided, add it to success message
+                if (result.documentLink) {
+                    const successText = successMessage.querySelector('p');
+                    const documentButton = document.createElement('a');
+                    documentButton.href = result.documentLink;
+                    documentButton.target = '_blank';
+                    documentButton.style.cssText = 'display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px;';
+                    documentButton.textContent = '📄 View Your College List';
+                    
+                    const docInfo = document.createElement('p');
+                    docInfo.style.cssText = 'margin-top: 10px; font-size: 14px; color: #718096;';
+                    docInfo.textContent = result.documentName || 'Access your personalized college list';
+                    
+                    successMessage.appendChild(docInfo);
+                    successMessage.appendChild(documentButton);
+                }
+                
                 // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-                // Hide success message after 5 seconds
+                // Hide success message after 10 seconds (longer since there's a link)
                 setTimeout(() => {
                     successMessage.classList.add('hidden');
-                }, 5000);
+                    // Remove added elements
+                    const addedElements = successMessage.querySelectorAll('a, p:last-child');
+                    addedElements.forEach(el => {
+                        if (el.textContent.includes('college list') || el.textContent.includes('College List')) {
+                            el.remove();
+                        }
+                    });
+                }, 10000);
             } else {
                 showError(result.message || 'Something went wrong. Please try again.');
             }

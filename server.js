@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
 const { sendThankYouEmail } = require('./emailService');
+const { getDocumentLink } = require('./driveConfig');
 
 const app = express();
 
@@ -77,6 +78,10 @@ const responseSchema = new mongoose.Schema({
     type: Number,
     default: null
   },
+  percentileRange: {
+    type: String,
+    required: true
+  },
   branches: {
     type: [String],
     required: true
@@ -109,15 +114,22 @@ app.post('/api/submit', async (req, res) => {
       nodeEnv: process.env.NODE_ENV
     });
 
-    const { fullName, mobileNo, email, mhtCetScore, jeeScore, branches, cities } = req.body;
+    const { fullName, mobileNo, email, mhtCetScore, jeeScore, branches, cities, percentileRange } = req.body;
 
     // Validation
-    if (!fullName || !mobileNo || !email || !mhtCetScore || !branches || !cities) {
+    if (!fullName || !mobileNo || !email || !mhtCetScore || !branches || !cities || !percentileRange) {
       console.error('❌ Validation failed: Missing required fields');
       return res.status(400).json({ 
         success: false, 
         message: 'Please fill all required fields' 
       });
+    }
+
+    // Get document link for the selected percentile range
+    const documentInfo = getDocumentLink(percentileRange);
+    
+    if (!documentInfo) {
+      console.error('❌ No document found for percentile range:', percentileRange);
     }
 
     // Check MongoDB connection
@@ -133,6 +145,7 @@ app.post('/api/submit', async (req, res) => {
       email,
       mhtCetScore: parseFloat(mhtCetScore),
       jeeScore: jeeScore ? parseFloat(jeeScore) : null,
+      percentileRange,
       branches: Array.isArray(branches) ? branches : [branches],
       cities: Array.isArray(cities) ? cities : [cities]
     });
@@ -147,8 +160,11 @@ app.post('/api/submit', async (req, res) => {
         email,
         mhtCetScore: parseFloat(mhtCetScore),
         jeeScore: jeeScore ? parseFloat(jeeScore) : null,
+        percentileRange,
         branches: Array.isArray(branches) ? branches : [branches],
-        cities: Array.isArray(cities) ? cities : [cities]
+        cities: Array.isArray(cities) ? cities : [cities],
+        documentLink: documentInfo ? documentInfo.link : null,
+        documentName: documentInfo ? documentInfo.name : null
       });
 
       if (!emailResult.success) {
@@ -163,8 +179,10 @@ app.post('/api/submit', async (req, res) => {
 
     res.status(201).json({ 
       success: true, 
-      message: 'Response submitted successfully! Check your email for details.',
+      message: 'Response submitted successfully! Check your email for college list.',
       data: newResponse,
+      documentLink: documentInfo ? documentInfo.link : null,
+      documentName: documentInfo ? documentInfo.name : null,
       emailSent: true
     });
   } catch (error) {

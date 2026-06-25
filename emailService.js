@@ -15,7 +15,7 @@ const createTransporter = () => {
 
 // Generate Thank You Email HTML
 const generateThankYouEmail = (userData) => {
-  const { fullName, mhtCetScore, jeeScore, branches, cities } = userData;
+  const { fullName, mhtCetScore, jeeScore, branches, cities, percentileRange, documentLink, documentName } = userData;
 
   return `
 <!DOCTYPE html>
@@ -343,7 +343,27 @@ const generateThankYouEmail = (userData) => {
         <span class="summary-label">Cities</span>
         <span class="summary-value">${cities.join(', ')}</span>
       </div>
+      
+      ${percentileRange ? `
+      <div class="summary-row">
+        <span class="summary-label">Percentile Range</span>
+        <span class="summary-value">${percentileRange}%</span>
+      </div>
+      ` : ''}
     </div>
+
+    ${documentLink ? `
+    <!-- College List Document -->
+    <div class="summary-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 30px; margin: 25px 0;">
+      <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
+      <div style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">${documentName || 'Your College List'}</div>
+      <p style="margin: 15px 0; opacity: 0.95;">Based on your percentile range, here's your personalized college list</p>
+      <a href="${documentLink}" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 25px; font-weight: bold; font-size: 16px; margin-top: 10px;">
+        VIEW COLLEGE LIST →
+      </a>
+      <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">Click the button above to access your document</p>
+    </div>
+    ` : ''}
 
     <!-- What Happens Next -->
     <div class="next-steps">
