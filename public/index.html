@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravesh Mitra - MHT-CET Counselling</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="/images/logo remove bg (2).png" alt="Pravesh Mitra Logo" class="logo-img">
+            </div>
+
+            <!-- Platform Badge -->
+            <div class="platform-badge">
+                <span class="badge-dot">●</span> #1 Platform for MHT-CET Aspirants
+            </div>
+
+            <!-- Hero Heading -->
+            <h1 class="hero-heading">
+                <span class="hero-text-dark">कॉलेज तुमचं,</span>
+                <span class="hero-text-blue">जबाबदारी आमची!</span>
+            </h1>
+
+            <!-- Hero Subtitle -->
+            <p class="hero-subtitle">
+                Get accurate college suggestions, cutoff insights, and expert guidance for MHT-CET admissions.
+            </p>
+
+            <!-- Hero Buttons -->
+            <div class="hero-buttons">
+                <button class="hero-btn primary-btn" onclick="scrollToForm()">
+                    Get College Suggestions →
+                </button>
+                <a href="https://praveshmitra.online/" target="_blank" class="hero-btn secondary-btn" style="text-decoration: none; display: inline-block;">
+                    Explore Colleges
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <div class="container">
+        <div class="form-card" id="formSection">
+            <h1 class="title">Start Your Journey</h1>
+            <p class="subtitle">Quick form - Get instant college suggestions</p>
+            
+            <form id="counsellingForm">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        class="form-input" 
+                        placeholder="Full Name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <!-- Mobile and Email Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <input 
+                            type="tel" 
+                            id="mobileNo" 
+                            name="mobileNo" 
+                            class="form-input" 
+                            placeholder="Mobile No." 
+                            pattern="[0-9]{10}"
+                            autocomplete="tel"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="Email"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- MHT-CET and JEE Score Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <input 
+                            type="number" 
+                            id="mhtCetScore" 
+                            name="mhtCetScore" 
+                            class="form-input" 
+                            placeholder="MHT-CET Score" 
+                            min="0" 
+                            max="200" 
+                            step="0.01"
+                            autocomplete="off"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="number" 
+                            id="jeeScore" 
+                            name="jeeScore" 
+                            class="form-input" 
+                            placeholder="JEE Score (Optional)" 
+                            min="0" 
+                            max="360" 
+                            step="0.01"
+                            autocomplete="off"
+                        >
+                    </div>
+                </div>
+
+                <!-- Branches Dropdown with Checkboxes -->
+                <div class="form-group">
+                    <div class="custom-dropdown" id="branchesDropdown">
+                        <div class="dropdown-header" onclick="toggleDropdown('branchesDropdown')">
+                            <span class="dropdown-placeholder" id="branchesPlaceholder">Select Branches</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-search">
+                                <input type="text" id="branchesSearch" name="branchesSearch" placeholder="Search branches..." autocomplete="off" onkeyup="filterOptions('branchesSearch', 'branchesOptions')">
+                            </div>
+                            <div class="dropdown-options" id="branchesOptions">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Computer Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Computer Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Information Technology" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Information Technology</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Electronics & Telecommunication (EXTC)" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Electronics & Telecommunication (EXTC)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Mechanical Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Mechanical Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Civil Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Civil Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Electrical Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Electrical Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Electronics Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Electronics Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Artificial Intelligence & Data Science" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Artificial Intelligence & Data Science</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Artificial Intelligence & Machine Learning" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Artificial Intelligence & Machine Learning</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Chemical Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Chemical Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Instrumentation Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Instrumentation Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Production Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Production Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Automobile Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Automobile Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Biotechnology" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Biotechnology</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Textile Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Textile Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Printing & Packaging Technology" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Printing & Packaging Technology</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Computer Science & Engineering (Cyber Security)" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Computer Science & Engineering (Cyber Security)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Internet of Things (IoT)" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Internet of Things (IoT)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Robotics & Automation" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Robotics & Automation</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Food Technology" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Food Technology</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Petrochemical Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Petrochemical Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Polymer Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Polymer Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Mining Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Mining Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Agricultural Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Agricultural Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Aerospace Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Aerospace Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Industrial Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Industrial Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Environmental Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Environmental Engineering</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="branches" value="Structural Engineering" onchange="updateDropdownText('branches', 'branchesPlaceholder', 'Select Branches')">
+                                    <span>Structural Engineering</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="select-hint">Click to select multiple branches</span>
+                </div>
+
+                <!-- Cities Dropdown with Checkboxes -->
+                <div class="form-group">
+                    <div class="custom-dropdown" id="citiesDropdown">
+                        <div class="dropdown-header" onclick="toggleDropdown('citiesDropdown')">
+                            <span class="dropdown-placeholder" id="citiesPlaceholder">Select Cities</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-search">
+                                <input type="text" id="citiesSearch" name="citiesSearch" placeholder="Search cities..." autocomplete="off" onkeyup="filterOptions('citiesSearch', 'citiesOptions')">
+                            </div>
+                            <div class="dropdown-options" id="citiesOptions">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Mumbai" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Mumbai</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Pune" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Pune</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Nagpur" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Nagpur</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Nashik" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Nashik</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Aurangabad (Chhatrapati Sambhaji Nagar)" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Aurangabad (Chhatrapati Sambhaji Nagar)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Kolhapur" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Kolhapur</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Thane" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Thane</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Navi Mumbai" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Navi Mumbai</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Solapur" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Solapur</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Amravati" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Amravati</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Satara" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Satara</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Sangli" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Sangli</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Ahmednagar" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Ahmednagar</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Akola" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Akola</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Latur" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Latur</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Dhule" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Dhule</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Chandrapur" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Chandrapur</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Jalgaon" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Jalgaon</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Nanded" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Nanded</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Parbhani" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Parbhani</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Bid (Beed)" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Bid (Beed)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Ratnagiri" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Ratnagiri</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Yavatmal" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Yavatmal</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Wardha" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Wardha</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Gondia" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Gondia</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Bhandara" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Bhandara</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Osmanabad" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Osmanabad</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Jalna" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Jalna</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Buldana" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Buldana</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Hingoli" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Hingoli</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Washim" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Washim</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Raigad" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Raigad</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Sindhudurg" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Sindhudurg</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Palghar" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Palghar</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cities" value="Gadchiroli" onchange="updateDropdownText('cities', 'citiesPlaceholder', 'Select Cities')">
+                                    <span>Gadchiroli</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="select-hint">Click to select multiple cities</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    GET MY SUGGESTIONS
+                </button>
+
+                <!-- Privacy Notice -->
+                <div class="privacy-notice">
+                    <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Your data is safe with us.</span>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message hidden">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                <p>Response submitted successfully! We'll get back to you soon.</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message hidden">
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="/images/logo remove bg (2).png" alt="Pravesh Mitra" class="footer-logo-img">
+                <p class="footer-tagline">ऍडमिशन तुमचं, जबाबदारी आमची!</p>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>📞 +91 95296 79073</p>
+                <p>✉️ info@praveshmitra.online</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Pravesh Mitra. All rights reserved.</p>
+                <p class="footer-links">
+                    <a href="#">Privacy Policy</a> • 
+                    <a href="#">Terms of Service</a> • 
+                    <a href="#">Refund Policy</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
