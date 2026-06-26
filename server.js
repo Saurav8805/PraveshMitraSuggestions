@@ -56,7 +56,16 @@ const connectDB = async () => {
     }
 
     // Use newer connection string format without deprecated options
-    await mongoose.connect(process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/pravesh-mitra');
+    // Add database name 'mhtcet' to the connection string if not already present
+    let mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/mhtcet';
+    
+    // Check if database name is in the URI, if not add /mhtcet
+    if (!mongoUri.includes('mongodb.net/') || mongoUri.includes('mongodb.net/?')) {
+      mongoUri = mongoUri.replace('mongodb.net/?', 'mongodb.net/mhtcet?');
+      mongoUri = mongoUri.replace('mongodb.net?', 'mongodb.net/mhtcet?');
+    }
+    
+    await mongoose.connect(mongoUri);
     console.log('✅ MongoDB Connected Successfully');
     console.log('📊 Database:', mongoose.connection.name);
   } catch (error) {
