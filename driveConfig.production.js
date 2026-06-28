@@ -16,7 +16,8 @@ function getDocumentLink(percentileRange) {
     return null;
   }
   
-  const directLink = `https://drive.google.com/file/d/${doc.fileId}/view`;
+  // Generate embedded preview link (opens within website, not Google Drive interface)
+  const directLink = `https://drive.google.com/file/d/${doc.fileId}/preview`;
   
   return {
     link: directLink,
