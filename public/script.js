@@ -172,32 +172,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 successMessage.classList.remove('hidden');
                 form.reset();
                 
-                // If document link is provided, show embedded viewer
+                // If document link is provided, show it prominently
                 if (result.documentLink) {
                     const documentContainer = document.getElementById('documentLinkContainer');
                     documentContainer.innerHTML = `
-                        <div style="margin-top: 25px; padding: 15px; background: #f8f9fa; border-radius: 12px; text-align: center;">
-                            <h3 style="color: #667eea; margin: 10px 0 15px 0; font-size: 20px;">📄 ${result.documentName || 'Your Document'}</h3>
-                            <p style="color: #718096; margin-bottom: 15px; font-size: 14px;">Document is loading below. You can scroll, zoom, and download it.</p>
-                            
-                            <!-- Embedded Document Viewer -->
-                            <div style="position: relative; width: 100%; height: 600px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                                <iframe 
-                                    src="${result.documentLink}" 
-                                    style="width: 100%; height: 100%; border: none;"
-                                    allow="autoplay"
-                                    loading="lazy">
-                                </iframe>
-                            </div>
-                            
-                            <p style="color: #718096; margin-top: 15px; font-size: 13px;">
-                                Can't see the document? 
-                                <a href="${result.documentLink.replace('/preview', '/view')}" 
-                                   target="_blank" 
-                                   style="color: #667eea; text-decoration: underline;">
-                                   Open in new tab
-                                </a>
-                            </p>
+                        <div style="margin-top: 25px; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
+                            <h3 style="color: white; margin: 10px 0; font-size: 20px;">${result.documentName || 'Your College List'}</h3>
+                            <p style="color: rgba(255,255,255,0.9); margin: 15px 0; font-size: 14px;">Click below to open your document</p>
+                            <a href="${result.documentLink}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style="display: inline-block; 
+                                      background: white; 
+                                      color: #667eea; 
+                                      padding: 14px 35px; 
+                                      text-decoration: none; 
+                                      border-radius: 25px; 
+                                      font-weight: bold; 
+                                      font-size: 16px; 
+                                      margin-top: 10px;
+                                      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                                      transition: transform 0.2s;
+                                      cursor: pointer;">
+                                📄 OPEN PDF IN GOOGLE DRIVE
+                            </a>
+                            <p style="color: rgba(255,255,255,0.8); margin-top: 15px; font-size: 13px;">Opens in a new tab</p>
                         </div>
                     `;
                 }
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-                // Don't auto-hide if there's a document link (user needs time to view it)
+                // Don't auto-hide if there's a document link (user needs time to click it)
                 if (!result.documentLink) {
                     setTimeout(() => {
                         successMessage.classList.add('hidden');
