@@ -32,6 +32,4 @@ SECURITY_FIX_SUMMARY.txt
 SIMPLE_FIX.md
 CLEANUP_COMPLETE.md
 *_BACKUP/
-
-# Drive configuration with file IDs
-driveConfig.js
+VERCEL_DEPLOYMENT.md
