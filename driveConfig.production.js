@@ -3,37 +3,9 @@
 // Google Drive file IDs are public-safe (they're just document identifiers)
 
 const driveDocuments = {
-  '10-30': {
-    fileId: '19Afgf08pqj-H8q1zVs65NeeMKKjBoUkq',
-    name: '10-30 Percentile College List'
-  },
-  '30-40': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '30-40 Percentile College List'
-  },
-  '40-50': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '40-50 Percentile College List'
-  },
-  '50-60': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '50-60 Percentile College List'
-  },
-  '60-70': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '60-70 Percentile College List'
-  },
-  '70-80': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '70-80 Percentile College List'
-  },
-  '80-90': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '80-90 Percentile College List'
-  },
-  '90-100': {
-    fileId: '164Gal0Aan-VmzPpxfDldZVA8cxe84JmI',
-    name: '90-100 Percentile College List (Top Tier)'
+  'pune-below-50': {
+    fileId: '',  // You'll update this manually
+    name: 'PUNE Cut_off list Below 50%tile'
   }
 };
 
